@@ -1,0 +1,4 @@
+name = Custom Breadcrumbs Block
+description = Checks path and creates a breadcrumb trail
+core = 7.x
+dependencies[] = block

@@ -1,0 +1,75 @@
+<?php
+
+	// Tells Drupal there's a block
+	function custom_breadcrumbs_block_block_info() {
+		$block['custom_breadcrumbs_block'] = array(
+			'info' => t('Custom Breadcrumbs Block'),
+			'cache' => DRUPAL_NO_CACHE,
+		);
+		return $block;
+	}
+
+	// Tells Drupal what's in the block
+	// I'm probably checking paths in a dumb way
+	function custom_breadcrumbs_block_block_view($block_key) {
+		$path = drupal_get_path_alias();
+
+		$portfolioHome = "portfolio";
+		$blogHome = "blog";
+		$eventsHome = "events";
+		$aboutHome = "about";
+
+		$portfolioSub = "portfolio/*";
+		$blogSub = "blog/*";
+		$eventsSub = "events/*";
+		$aboutSub = "about/*";
+
+		$contact = "contact";
+		$thanks = "thanks";
+
+		$homePath = '<a href="/">Home</a>';
+		$divider = ' <span class="divider">&raquo;</span> ';
+		$pageTitle = drupal_get_title();
+
+		$block = array();
+
+		// $block_key makes sure I'm targeting the right block
+
+		if($block_key == 'custom_breadcrumbs_block'){
+			if(drupal_match_path($path,$portfolioHome)) {
+				$block['content'] = t($homePath . $divider . $pageTitle);
+			}
+			if(drupal_match_path($path,$portfolioSub)) {
+				$block['content'] = t($homePath . $divider . '<a href="/portfolio">Portfolio</a>' . $divider . $pageTitle);
+			}
+
+			if(drupal_match_path($path,$blogHome)) {
+				$block['content'] = t($homePath  . $divider . $pageTitle);
+			}
+			if(drupal_match_path($path,$blogSub)) {
+				$block['content'] = t($homePath . $divider . '<a href="/blog">Blog</a>' . $divider . $pageTitle);
+			}
+
+			if(drupal_match_path($path,$eventsHome)) {
+				$block['content'] = t($homePath . $divider . $pageTitle);
+			}
+			if(drupal_match_path($path,$eventsSub)) {
+				$block['content'] = t($homePath . $divider . '<a href="/events">Events</a>' . $divider . $pageTitle);
+			}
+
+			if(drupal_match_path($path,$aboutHome)) {
+				$block['content'] = t($homePath . $divider . $pageTitle);
+			}
+			if(drupal_match_path($path,$aboutSub)) {
+				$block['content'] = t($homePath . $divider . '<a href="/about">About</a>' . $divider .$pageTitle);
+			}
+
+			if(drupal_match_path($path,$contact) || drupal_match_path($path,$thanks)) {
+				$block['content'] = t($homePath . $divider . $pageTitle);
+			}
+		}
+
+		return $block;
+	}
+
+?>
