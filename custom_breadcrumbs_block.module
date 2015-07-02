@@ -29,7 +29,7 @@
 
 		$homePath = '<a href="/">Home</a>';
 		$divider = ' <span class="divider">&raquo;</span> ';
-		$pageTitle = drupal_get_title();
+		$pageTitle = '<span class="title">' . drupal_get_title() . '</span>';
 
 		$block = array();
 
